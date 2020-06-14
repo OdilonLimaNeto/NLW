@@ -1,0 +1,56 @@
+{# Herdando layout.html com todas as suas configurações de pagina para search-results.html #}
+{% extends "layout.html" %}
+
+{# Setando "page-search-results" através variavel bodyId para layout  #}
+{% set pageID = "page-search-results" %}
+
+{# Bloco de titulo #}
+{% block title %}
+  <title>Resultado da pesquista</title>
+{% endblock title %}
+{# Fim do bloco de titulo #}
+
+{# Bloco de estilos #}
+{% block styles %}
+  <link rel="stylesheet" href="/styles/search-results.css">
+{% endblock styles %}
+{# Fim do bloco de estilos #}
+
+{# Bloco content #}
+{% block content %}
+  {% include "partial/page-header.html" %}
+
+  <main>
+{% if total > 0 %}
+    <h4>
+      <strong>{{ total }} pontos</strong> encontrados</h4>
+
+    <div class="cards">
+
+        {% for local in localidades %}
+
+              <div class="card">
+                <img src="{{ local.image }}" alt="{{ local.name }}">
+                <h1>{{ local.name }}</h1>
+                <h3>{{ local.items }}</h3>
+                <p>{{ local.city }} - {{ local.state }}
+                  <br/>
+                  {{ local.address }}
+                  <br/>
+                  {{ local.address2 }}
+                </p>
+              </div>
+
+        {% endfor %}
+    </div>
+
+  {%else%}
+      <h4><strong>Nenhum</strong> local encontrado</h4>
+{% endif %}
+    
+
+  </main>
+{% endblock content %}
+{# Fim do bloco content #}
+
+{# PAREI APÓS CONFIGURAR AMOSTRA PARA NENHUM REGISTRO ENCONTRADO. 01:08:19 DO VIDEO #}
